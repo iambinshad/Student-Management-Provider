@@ -75,25 +75,20 @@ class DisplayFullDetails extends StatelessWidget {
                     )
                   ],
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 500, right: 500, top: 20),
-                  child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (ctx) {
-                          return EditScreen(
-                            index: index,
-                            address: address,
-                            age: age,
-                            name: name,
-                            phone: phone,
-                          );
-                        }));
-                      },
-                      icon: const Icon(Icons.edit),
-                      label: const Text('Edit')),
-                )
+                ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (ctx) {
+                        return EditScreen(
+                          index: index,
+                          address: address,
+                          age: age,
+                          name: name,
+                          phone: phone,
+                        );
+                      }));
+                    },
+                    icon: const Icon(Icons.edit),
+                    label: const Text('Edit'))
               ],
             ),
           )),

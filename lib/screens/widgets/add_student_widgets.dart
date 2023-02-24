@@ -1,21 +1,25 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:reg_database/db/functions/db_functions.dart';
 import 'package:reg_database/db/model/data_model.dart';
 
-class AddStudentWidget extends StatefulWidget {
-  const AddStudentWidget({super.key});
-  @override
-  State<AddStudentWidget> createState() => _AddStudentWidgetState();
-}
-
-class _AddStudentWidgetState extends State<AddStudentWidget> {
+class AddStudentWidget extends StatelessWidget {
+  AddStudentWidget({super.key});
   final _nameController = TextEditingController();
+
   final _ageController = TextEditingController();
+
   final _addressController = TextEditingController();
+
   final _phoneController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
+    final studentProvider=Provider.of<DbProvider>(context, listen: false);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -109,7 +113,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
                 ElevatedButton.icon(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        onAddStudentButtonClicked();
+                        onAddStudentButtonClicked(context,studentProvider);
                         Navigator.pop(context);
                       }
                     },
@@ -123,7 +127,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
     );
   }
 
-   Future<void> onAddStudentButtonClicked() async {
+  Future<void> onAddStudentButtonClicked(context,studentProvider) async {
     final name = _nameController.text.trim();
     final age = _ageController.text.trim();
     final address = _addressController.text.trim();
@@ -139,6 +143,7 @@ class _AddStudentWidgetState extends State<AddStudentWidget> {
       address: address,
       phone: phone,
     );
-    addStudent(student);
+    log('button clicked');
+    studentProvider.addStudent(student);
   }
 }

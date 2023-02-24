@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 // import 'package:flutter/src/widgets/container.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 
@@ -138,7 +139,8 @@ class _EditScreenState extends State<EditScreen> {
                               address: _addressController.text,
                               phone: _phoneController.text,
                             );
-                            updateStudentModel(widget.index, newDetails);
+                            Provider.of<DbProvider>(context, listen: false)
+                                .updateStudentModel(widget.index, newDetails);
                             Navigator.pop(context);
                             Navigator.pop(context);
                             ScaffoldMessenger.of(context).showSnackBar(
